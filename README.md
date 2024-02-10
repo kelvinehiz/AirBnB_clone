@@ -202,7 +202,7 @@ show <class> <id>
 
 ```bash
 (hbnb) show BaseModel 6cfb47c4-a434-4da7-ac03-2122624c3762
-[BaseModel] (a) [BaseModel] (6cfb47c4-a434-4da7-ac03-2122624c3762) {'id': '6cfb47c4-a434-4da7-ac03-2122624c3762', 'created_at': datetime.datetime(2021, 11, 14, 3, 28, 45, 571360), 'updated_at': datetime.datetime(2021, 11, 14, 3, 28, 45, 571389)}
+[BaseModel] (a) [BaseModel] (6cfb47c4-a434-4da7-ac03-2122624c3762) {'id': '6cfb47c4-a434-4da7-ac03-2122624c3762', 'created_at': datetime.datetime(2024, 1, 07, 3, 28, 45, 571360), 'updated_at': datetime.datetime(2024, 1, 07, 3, 28, 45, 571389)}
 (hbnb)
 ```
 
@@ -229,7 +229,7 @@ show <class> <id>
 (hbnb) create BaseModel
 e45ddda9-eb80-4858-99a9-226d4f08a629
 (hbnb) all BaseModel
-["[BaseModel] (4c8f7ebc-257f-4ed1-b26b-e7aace459897) [BaseModel] (4c8f7ebc-257f-4ed1-b26b-e7aace459897) {'id': '4c8f7ebc-257f-4ed1-b26b-e7aace459897', 'created_at': datetime.datetime(2021, 11, 13, 22, 19, 19, 447155), 'updated_at': datetime.datetime(2021, 11, 13, 22, 19, 19, 447257), 'name': 'My First Model', 'my_number': 89}"]
+["[BaseModel] (4c8f7ebc-257f-4ed1-b26b-e7aace459897) [BaseModel] (4c8f7ebc-257f-4ed1-b26b-e7aace459897) {'id': '4c8f7ebc-257f-4ed1-b26b-e7aace459897', 'created_at': datetime.datetime(2024, 1, 07, 22, 19, 19, 447155), 'updated_at': datetime.datetime(2024, 1, 07, 22, 19, 19, 447257), 'name': 'My First Model', 'my_number': 89}"]
 ["[BaseMode
 ```
 
@@ -255,9 +255,9 @@ e952b772-80a5-41e9-b728-6bc4dc5c21b4
 ```bash
 (hbnb) create User
 1afa163d-486e-467a-8d38-3040afeaa1a1
-(hbnb) update User 1afa163d-486e-467a-8d38-3040afeaa1a1 email "aysuarex@gmail.com"
+(hbnb) update User 1afa163d-486e-467a-8d38-3040afeaa1a1 email "kelvinehiz@gmail.com"
 (hbnb) show User 1afa163d-486e-467a-8d38-3040afeaa1a1
-[User] (s) [User] (1afa163d-486e-467a-8d38-3040afeaa1a1) {'id': '1afa163d-486e-467a-8d38-3040afeaa1a1', 'created_at': datetime.datetime(2021, 11, 14, 23, 42, 10, 502157), 'updated_at': datetime.datetime(2021, 11, 14, 23, 42, 10, 502186), 'email': 'aysuarex@gmail.com'}
+[User] (s) [User] (1afa163d-486e-467a-8d38-3040afeaa1a1) {'id': '1afa163d-486e-467a-8d38-3040afeaa1a1', 'created_at': datetime.datetime(2024, 1, 07, 23, 42, 10, 502157), 'updated_at': datetime.datetime(2024, 1, 07, 23, 42, 10, 502186), 'email': 'kelvinehiz@gmail.com'}
 (hbnb)
 
 ```
