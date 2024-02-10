@@ -263,7 +263,7 @@ e952b772-80a5-41e9-b728-6bc4dc5c21b4
 ```
 ## Authors
 <details>
-    <summary>Iyasele Kelvin/summary>
+    <summary>Iyasele Kelvin</summary>
     <ul>
     <li><a href="https://www.github.com/kelvinehiz">Github</a></li>
     <li><a href="https://www.twitter.com/minus273k">Twitter</a></li>
