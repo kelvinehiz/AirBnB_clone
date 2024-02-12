@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""Defines the HBnB console."""
+"""Test code for AirBnB console."""
 
 import cmd
 import re
 from shlex import split
-from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -13,8 +12,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
-
-def parse(arg):
+def parse_arguments(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
@@ -32,26 +30,21 @@ def parse(arg):
         return retl
 
 
-class HBNBCommand(cmd.Cmd):
-    """Defines the HolbertonBnB command interpreter."""
+class TestAirBnBConsole(cmd.Cmd):
+    """Test command interpreter for AirBnB project."""
 
     prompt = "(hbnb) "
     __classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "City",
-        "Place",
-        "Amenity",
-        "Review"
+        "BaseModel", "User", "State", "City",
+        "Place", "Amenity", "Review"
     }
 
     def emptyline(self):
-        """Do nothing upon receiving an empty line."""
+        """Do nothing when an empty line is entered."""
         pass
 
     def default(self, arg):
-        """Default behavior for cmd module when input is invalid."""
+        """Handle default command behavior."""
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -72,73 +65,74 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_quit(self, arg):
-        """Quit command to exit the program."""
+        """Exit the test console."""
         return True
 
     def do_EOF(self, arg):
-        """EOF signal to exit the program."""
+        """Exit the test console at EOF."""
         print("")
         return True
 
     def do_create(self, arg):
-        """Create a new class instance and print its id."""
-        argl = parse(arg)
+        """Create a new instance."""
+        argl = parse_arguments(arg)
         if len(argl) == 0:
             print("** class name missing **")
-        elif argl[0] not in HBNBCommand.__classes:
+        elif argl[0] not in TestAirBnBConsole.__classes:
             print("** class doesn't exist **")
         else:
-            print(eval(argl[0])().id)
-            storage.save()
+            new_instance = eval(argl[0])()
+            new_instance.save()
+            print(new_instance.id)
 
     def do_show(self, arg):
-        """Display the string representation of a class instance."""
-        argl = parse(arg)
-        objdict = storage.all()
+        """Show string representation of an instance."""
+        argl = parse_arguments(arg)
+        obj_dict = storage.all()
         if len(argl) == 0:
             print("** class name missing **")
-        elif argl[0] not in HBNBCommand.__classes:
+        elif argl[0] not in TestAirBnBConsole.__classes:
             print("** class doesn't exist **")
         elif len(argl) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(argl[0], argl[1]) not in objdict:
+        elif "{}.{}".format(argl[0], argl[1]) not in obj_dict:
             print("** no instance found **")
         else:
-            print(objdict["{}.{}".format(argl[0], argl[1])])
+            print(obj_dict["{}.{}".format(argl[0], argl[1])])
 
     def do_destroy(self, arg):
-        """Delete a class instance of a given id."""
-        argl = parse(arg)
-        objdict = storage.all()
+        """Destroy an instance."""
+        argl = parse_arguments(arg)
+        obj_dict = storage.all()
         if len(argl) == 0:
             print("** class name missing **")
-        elif argl[0] not in HBNBCommand.__classes:
+        elif argl[0] not in TestAirBnBConsole.__classes:
             print("** class doesn't exist **")
         elif len(argl) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(argl[0], argl[1]) not in objdict.keys():
+        elif "{}.{}".format(argl[0], argl[1]) not in obj_dict.keys():
             print("** no instance found **")
         else:
-            del objdict["{}.{}".format(argl[0], argl[1])]
+            del obj_dict["{}.{}".format(argl[0], argl[1])]
             storage.save()
 
     def do_all(self, arg):
         """Display string representations of all instances."""
-        argl = parse(arg)
-        if len(argl) > 0 and argl[0] not in HBNBCommand.__classes:
+        argl = parse_arguments(arg)
+        if len(argl) > 0 and argl[0] not in TestAirBnBConsole.__classes:
             print("** class doesn't exist **")
         else:
-            objl = []
+            obj_list = []
             for obj in storage.all().values():
                 if len(argl) > 0 and argl[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
+                    obj_list.append(obj.__str__())
                 elif len(argl) == 0:
-                    objl.append(obj.__str__())
-            print(objl)
+                    obj_list.append(obj.__str__())
+            print(obj_list)
 
     def do_count(self, arg):
-        """Retrieve the number of instances of a given class."""
-        argl = parse(arg)
+        """Count the number of instances."""
+        argl = parse_arguments(arg)
         count = 0
         for obj in storage.all().values():
             if argl[0] == obj.__class__.__name__:
@@ -146,20 +140,20 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_update(self, arg):
-        """Update a class instance of a given id."""
-        argl = parse(arg)
-        objdict = storage.all()
+        """Update an instance."""
+        argl = parse_arguments(arg)
+        obj_dict = storage.all()
 
         if len(argl) == 0:
             print("** class name missing **")
             return False
-        if argl[0] not in HBNBCommand.__classes:
+        if argl[0] not in TestAirBnBConsole.__classes:
             print("** class doesn't exist **")
             return False
         if len(argl) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(argl[0], argl[1]) not in objdict.keys():
+        if "{}.{}".format(argl[0], argl[1]) not in obj_dict.keys():
             print("** no instance found **")
             return False
         if len(argl) == 2:
@@ -173,14 +167,14 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         if len(argl) == 4:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
+            obj = obj_dict["{}.{}".format(argl[0], argl[1])]
             if argl[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[argl[2]])
                 obj.__dict__[argl[2]] = valtype(argl[3])
             else:
                 obj.__dict__[argl[2]] = argl[3]
         elif type(eval(argl[2])) == dict:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
+            obj = obj_dict["{}.{}".format(argl[0], argl[1])]
             for k, v in eval(argl[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in {str, int, float}):
@@ -192,5 +186,5 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    TestAirBnBConsole().cmdloop()
 
